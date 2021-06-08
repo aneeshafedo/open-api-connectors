@@ -11,21 +11,21 @@ paths:
       description: search a country
       operationId: searchByCountryName
       parameters:
-        - description: A search term.
+        - description: Country Name.
           in: query
-          name: search
+          name: countryName
           required: false
           schema:
             type: string
         - description: "Inform the page. Starting with 1. Default: 1"
           in: query
-          name: page
+          name: pageNo
           required: false
           schema:
             type: integer
         - description: "Limit per page, Default: 20."
           in: query
-          name: limit
+          name: pageLimit
           required: false
           schema:
             type: integer

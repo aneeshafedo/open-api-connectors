@@ -1,0 +1,235 @@
+openapi: 3.0.0
+servers:
+  - url: http://corona-virus-stats.herokuapp.com/api/v1
+info:
+  description: Free API documentation to get Real time corona virus stats
+  title: COVID19 Stats
+  version: v1
+paths:
+  /cases/countries-search:
+    get:
+      description: search a country
+      operationId: searchByCountryName
+      parameters:
+        - description: Country Name.
+          in: query
+          name: countryName
+          required: false
+          schema:
+            type: string
+        - description: "Inform the page. Starting with 1. Default: 1"
+          in: query
+          name: pageNo
+          required: false
+          schema:
+            type: integer
+        - description: "Limit per page, Default: 20."
+          in: query
+          name: pageLimit
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResult"
+          description: ""
+      tags:
+        - cases
+    parameters: []
+  /cases/general-stats:
+    get:
+      description: Get the general stats
+      operationId: getGlobalStatus
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GlobalStatus"
+          description: ""
+      tags:
+        - cases
+    parameters: []
+components:
+  schemas:
+    SearchResult:
+      properties:
+        data:
+          description: Country status 
+          $ref: "#/components/schemas/SearchResponse"
+        status:
+          description: Status of the request
+          type: string
+      required:
+        - data
+        - status
+      type: object
+    SearchResponse: 
+      properties:
+        paginationMeta:
+          description: Pagination Metadata
+          $ref: "#/components/schemas/PaginationMetadata"
+        last_update:
+          description: Last updated date-time
+          type: string
+        rows:
+          description: Result from the response as rows
+          items:
+            $ref: "#/components/schemas/CountryStats"
+      required:
+        - paginationMeta
+        - last_update
+        - rows
+    PaginationMetadata:
+      properties:
+        currentPage:
+          type: integer
+        currentPageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalRecords:
+          type: integer
+    CountryStats:
+      properties:
+        active_cases:
+          nullable: true
+          title: Active cases
+          type: string
+        cases_per_mill_pop:
+          nullable: true
+          title: Cases per mill pop
+          type: string
+        country:
+          maxLength: 200
+          minLength: 1
+          title: Country
+          type: string
+        flag:
+          maxLength: 200
+          nullable: true
+          title: Flag
+          type: string
+        new_cases:
+          nullable: true
+          title: New cases
+          type: string
+        new_deaths:
+          nullable: true
+          title: New deaths
+          type: string
+        serious_critical:
+          nullable: true
+          title: Serious critical
+          type: string
+        total_cases:
+          nullable: true
+          title: Total cases
+          type: string
+        total_deaths:
+          nullable: true
+          title: Total deaths
+          type: string
+        total_recovered:
+          maxLength: 200
+          nullable: true
+          title: Total recovered
+          type: string
+      required:
+        - country
+      type: object
+    GlobalStatus:
+      properties:
+        data:
+          description: Global status 
+          $ref: "#/components/schemas/GeneralStats"
+        status:
+          description: Status of the request
+          type: string
+      required:
+        - data
+        - status
+    GeneralStats:
+      properties:
+        cases_with_outcome:
+          maximum: 9223372036854776000
+          minimum: -9223372036854776000
+          title: Cases with outcome
+          type: string
+        created_at:
+          format: date-time
+          readOnly: true
+          title: Created at
+          type: string
+        critical_condition_active_cases:
+          maximum: 9223372036854776000
+          minimum: -9223372036854776000
+          title: Critical condition active cases
+          type: string
+        currently_infected:
+          maximum: 9223372036854776000
+          minimum: -9223372036854776000
+          title: Currently infected
+          type: string
+        death_cases:
+          maximum: 9223372036854776000
+          minimum: -9223372036854776000
+          title: Death cases
+          type: string
+        death_closed_cases:
+          maximum: 9223372036854776000
+          minimum: -9223372036854776000
+          title: Death closed cases
+          type: string
+        deleted:
+          title: Deleted
+          type: boolean
+        id:
+          minLength: 1
+          readOnly: true
+          title: Id
+          type: string
+        last_update:
+          format: date-time
+          title: Last update
+          type: string
+        mild_condition_active_cases:
+          maximum: 9223372036854776000
+          minimum: -9223372036854776000
+          title: Mild condition active cases
+          type: string
+        recovered_closed_cases:
+          maximum: 9223372036854776000
+          minimum: -9223372036854776000
+          title: Recovered closed cases
+          type: string
+        recovery_cases:
+          maximum: 9223372036854776000
+          minimum: -9223372036854776000
+          title: Recovery cases
+          type: string
+        total_cases:
+          maximum: 9223372036854776000
+          minimum: -9223372036854776000
+          title: Total cases
+          type: string
+        updated_at:
+          format: date-time
+          readOnly: true
+          title: Updated at
+          type: string
+      required:
+        - total_cases
+        - death_cases
+        - recovery_cases
+        - currently_infected
+        - cases_with_outcome
+        - mild_condition_active_cases
+        - critical_condition_active_cases
+        - recovered_closed_cases
+        - death_closed_cases
+        - last_update
+      type: object

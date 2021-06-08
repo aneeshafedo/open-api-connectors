@@ -1,0 +1,27 @@
+{
+    "data": {
+        "paginationMeta": {
+            "currentPage": 1,
+            "currentPageSize": 1,
+            "totalPages": 1,
+            "totalRecords": 1
+        },
+        "last_update": "Apr, 22 2021, 18:24, UTC",
+        "rows": [
+            {
+                "country": "India",
+                "country_abbreviation": "IN",
+                "total_cases": "81,997",
+                "new_cases": "0",
+                "total_deaths": "2,649",
+                "new_deaths": "0",
+                "total_recovered": "27,969",
+                "active_cases": "51,379",
+                "serious_critical": "0",
+                "cases_per_mill_pop": "59.0",
+                "flag": "https://www.worldometers.info/img/flags/in-flag.gif"
+            }
+        ]
+    },
+    "status": "success"
+}

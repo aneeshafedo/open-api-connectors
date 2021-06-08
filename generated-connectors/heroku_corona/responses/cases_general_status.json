@@ -1,0 +1,20 @@
+{
+    "data": {
+        "total_cases": "145,104,448",
+        "recovery_cases": "123,127,222",
+        "death_cases": "3,079,493",
+        "last_update": "Apr, 22 2021, 18:24, UTC",
+        "currently_infected": "18,897,733",
+        "cases_with_outcome": "126,206,715",
+        "mild_condition_active_cases": "18,787,876",
+        "critical_condition_active_cases": "109,857",
+        "recovered_closed_cases": "123,127,222",
+        "death_closed_cases": "3,079,493",
+        "closed_cases_recovered_percentage": "98.0",
+        "closed_cases_death_percentage": "2.0",
+        "active_cases_mild_percentage": "99.0",
+        "active_cases_critical_percentage": "1.0",
+        "general_death_rate": "2.0"
+    },
+    "status": "success"
+}

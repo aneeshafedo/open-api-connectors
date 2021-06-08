@@ -74,6 +74,8 @@ tags:
   description: "Provide summary of Covid19 situation worldwide"
 - name: Metadata
   description: "Provide metadata that can be used in other operations"
+- name: Day one
+  description: "Returns all cases by case type for a country from the first recorded case."
 components:
   securitySchemes:
     basicAuth:

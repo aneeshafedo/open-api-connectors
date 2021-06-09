@@ -4,7 +4,7 @@ import  ballerina/lang.'string;
 
 public client class Client {
     http:Client clientEp;
-    public isolated function init(http:ClientConfiguration clientConfig =  {}, string serviceUrl = "https://corona.lmao.ninja") returns error? {
+    public isolated function init(http:ClientConfiguration clientConfig =  {}, string serviceUrl = "https://disease.sh") returns error? {
         http:Client httpEp = check new (serviceUrl, clientConfig);
         self.clientEp = httpEp;
     }

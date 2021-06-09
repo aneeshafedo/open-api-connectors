@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://corona.lmao.ninja
+  - url: https://disease.sh
 info:
   version: 3.0.0
   title: Novel Covid19 API - Disease.sh - An open API for disease-related statistics

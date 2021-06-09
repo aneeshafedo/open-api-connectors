@@ -58,7 +58,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/covidAll'
+                $ref: '#/components/schemas/CovidAll'
   '/v3/covid-19/states/{states}':
     get:
       tags:
@@ -98,7 +98,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/covidState'
+                $ref: '#/components/schemas/CovidState'
   '/v3/covid-19/continents/{continent}':
     get:
       tags:
@@ -157,7 +157,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/covidContinent'
+                $ref: '#/components/schemas/CovidContinent'
   '/v3/covid-19/countries/{country}':
     get:
       tags:
@@ -216,7 +216,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/covidCountry'
+                $ref: '#/components/schemas/CovidCountry'
   /v3/covid-19/historical/all:
     get:
       tags:
@@ -235,7 +235,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/covidHistoricalAll'
+                $ref: '#/components/schemas/CovidHistoricalAll'
   '/v3/covid-19/historical/{country}':
     get:
       tags:
@@ -261,7 +261,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/covidHistoricalCountry'
+                $ref: '#/components/schemas/CovidHistoricalCountry'
   '/v3/covid-19/historical/{country}/{province}':
     get:
       tags:
@@ -293,7 +293,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/covidHistoricalProvince'
+                $ref: '#/components/schemas/CovidHistoricalProvince'
   /v3/covid-19/vaccine:
     get:
       tags:
@@ -306,7 +306,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/vaccines'
+                $ref: '#/components/schemas/Vaccines'
   /v3/covid-19/vaccine/coverage:
     get:
       tags:
@@ -321,23 +321,23 @@ paths:
             default: 30
         - name: fullData
           in: query
-          description: Flag indicating whether to return data type as simpleVaccineTimeline (false) or fullVaccineTimeline (true).
+          description: Flag indicating whether to return data type as SimpleVaccineTimeline (false) or FullVaccineTimeline (true).
           schema:
             type: string
             default: 'false'
-      summary: 'Get total global COVID-19 vaccine doses administered. Sourced from https://covid.ourworldindata.org/'
+      summary: 'Get total global COVID-19 Vaccine doses administered. Sourced from https://covid.ourworldindata.org/'
       responses:
         '200':
           description: Status Ok
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/vaccineCoverage'
+                $ref: '#/components/schemas/VaccineCoverage'
               examples:
                 simpleTimeline:
-                  $ref: '#/components/examples/simpleVaccineTimeline'
+                  $ref: '#/components/examples/SimpleVaccineTimeline'
                 fullTimeline:
-                  $ref: '#/components/examples/fullVaccineTimeline'
+                  $ref: '#/components/examples/FullVaccineTimeline'
   '/v3/covid-19/vaccine/coverage/countries/{country}':
     get:
       tags:
@@ -358,7 +358,7 @@ paths:
             default: 30
         - name: fullData
           in: query
-          description: Flag indicating whether to return timeline data type as simpleVaccineTimeline (false) or fullVaccineTimeline (true).
+          description: Flag indicating whether to return timeline data type as SimpleVaccineTimeline (false) or FullVaccineTimeline (true).
           schema:
             type: string
             default: 'false'
@@ -369,7 +369,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/vaccineCountryCoverage'
+                $ref: '#/components/schemas/VaccineCountryCoverage'
               examples:
                 simpleTimeline:
                   $ref: '#/components/examples/countrySimpleVaccineTimeline'
@@ -377,7 +377,7 @@ paths:
                   $ref: '#/components/examples/countryFullVaccineTimeline'
 components:
   schemas:
-    covidAll:
+    CovidAll:
       properties:
         updated:
           type: number
@@ -419,7 +419,7 @@ components:
           type: number
         affectedCountries:
           type: number
-    covidState:
+    CovidState:
       properties:
         state:
           type: string
@@ -445,7 +445,7 @@ components:
           type: number
         population:
           type: number
-    covidContinent:
+    CovidContinent:
       properties:
         updated:
           type: number
@@ -494,7 +494,7 @@ components:
           type: array
           items:
             type: string
-    covidCountry:
+    CovidCountry:
       properties:
         updated:
           type: number
@@ -558,7 +558,7 @@ components:
           type: number
         criticalPerOneMillion:
           type: number
-    covidHistoricalAll:
+    CovidHistoricalAll:
       description: 'The amount of key-value pairs in ''cases'', ''deaths'' and ''recovered'' is dependent on the ''lastdays'' query'
       properties:
         cases:
@@ -576,7 +576,7 @@ components:
           properties:
             date:
               type: number
-    covidHistoricalCountry:
+    CovidHistoricalCountry:
       properties:
         country:
           type: string
@@ -603,7 +603,7 @@ components:
               properties:
                 date:
                   type: number
-    covidHistoricalProvince:
+    CovidHistoricalProvince:
       properties:
         country:
           type: string
@@ -628,7 +628,7 @@ components:
               properties:
                 date:
                   type: number
-    vaccines:
+    Vaccines:
       properties:
         source:
           type: string
@@ -637,12 +637,12 @@ components:
         phases:
           type: array
           items:
-            $ref: '#/components/schemas/phases'
+            $ref: '#/components/schemas/Phases'
         data:
           type: array
           items:
-            $ref: '#/components/schemas/vaccine'
-    vaccine:
+            $ref: '#/components/schemas/Vaccine'
+    Vaccine:
       properties:
         candidate:
           type: string
@@ -660,31 +660,31 @@ components:
           type: array
           items:
             type: string
-    phases:
+    Phases:
       properties:
         phase:
           type: string
         candidates:
           type: string
-    vaccineCoverage:
+    VaccineCoverage:
       oneOf:
-        - $ref: '#/components/schemas/simpleVaccineTimeline'
-        - $ref: '#/components/schemas/fullVaccineTimeline'
-    vaccineCountryCoverage:
+        - $ref: '#/components/schemas/SimpleVaccineTimeline'
+        - $ref: '#/components/schemas/FullVaccineTimeline'
+    VaccineCountryCoverage:
       type: object
       properties:
         country:
           type: string
         timeline:
           oneOf:
-            - $ref: '#/components/schemas/simpleVaccineTimeline'
-            - $ref: '#/components/schemas/fullVaccineTimeline'
-    simpleVaccineTimeline:
+            - $ref: '#/components/schemas/SimpleVaccineTimeline'
+            - $ref: '#/components/schemas/FullVaccineTimeline'
+    SimpleVaccineTimeline:
       type: object
       properties:
         date:
           type: number
-    fullVaccineTimeline:
+    FullVaccineTimeline:
       type: array
       items:
         type: object
@@ -764,11 +764,11 @@ components:
             dailyPerMillion: 1000
             date: 4/25/2021
       summary: Full Vaccine Timeline
-    simpleVaccineTimeline:
+    SimpleVaccineTimeline:
       value:
         4/25/2021: 1000
       summary: Simple Vaccine Timeline
-    fullVaccineTimeline:
+    FullVaccineTimeline:
       value:
         - total: 1000
           daily: 1000
@@ -776,3 +776,6 @@ components:
           dailyPerMillion: 1000
           date: 4/25/2021
       summary: Full Vaccine Timeline
+externalDocs:
+  description: Find out more about this API
+  url: 'https://github.com/disease-sh/API'

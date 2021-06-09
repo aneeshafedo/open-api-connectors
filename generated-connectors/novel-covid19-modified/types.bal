@@ -1,4 +1,4 @@
-public type covidAll record {
+public type CovidAll record {
     float updated?;
     float cases?;
     float todayCases?;
@@ -21,7 +21,7 @@ public type covidAll record {
     float affectedCountries?;
 };
 
-public type covidState record {
+public type CovidState record {
     string state?;
     float updated?;
     float cases?;
@@ -36,7 +36,7 @@ public type covidState record {
     float population?;
 };
 
-public type covidContinent record {
+public type CovidContinent record {
     float updated?;
     float cases?;
     float todayCases?;
@@ -59,7 +59,7 @@ public type covidContinent record {
     string[] countries?;
 };
 
-public type covidCountry record {
+public type CovidCountry record {
     float updated?;
     string country?;
     record  { float _id?; string iso2?; string iso3?; float lat?; float long?; string flag?;}  countryInfo?;
@@ -85,32 +85,32 @@ public type covidCountry record {
     float criticalPerOneMillion?;
 };
 
-public type covidHistoricalAll record {
+public type CovidHistoricalAll record {
     record  { float date?;}  cases?;
     record  { float date?;}  deaths?;
     record  { float date?;}  recovered?;
 };
 
-public type covidHistoricalCountry record {
+public type CovidHistoricalCountry record {
     string country?;
     string[] province?;
     record  { record  { float date?;}  cases?; record  { float date?;}  deaths?; record  { float date?;}  recovered?;}  timeline?;
 };
 
-public type covidHistoricalProvince record {
+public type CovidHistoricalProvince record {
     string country?;
     string province?;
     record  { record  { float date?;}  cases?; record  { float date?;}  deaths?; record  { float date?;}  recovered?;}  timeline?;
 };
 
-public type vaccines record {
+public type Vaccines record {
     string 'source?;
     string totalCandidates?;
-    phases[] phases?;
-    vaccine[] data?;
+    Phases[] phases?;
+    Vaccine[] data?;
 };
 
-public type vaccine record {
+public type Vaccine record {
     string candidate?;
     string mechanism?;
     string[] sponsors?;
@@ -119,22 +119,22 @@ public type vaccine record {
     string[] institutions?;
 };
 
-public type phases record {
+public type Phases record {
     string phase?;
     string candidates?;
 };
 
-public type  vaccineCoverage simpleVaccineTimeline|fullVaccineTimeline;
+public type  VaccineCoverage SimpleVaccineTimeline|FullVaccineTimeline;
 
-public type vaccineCountryCoverage record {
+public type VaccineCountryCoverage record {
     string country?;
     anydata timeline?;
 };
 
-public type simpleVaccineTimeline record {
+public type SimpleVaccineTimeline record {
     float date?;
 };
 
-public type fullVaccineTimeline record {
+public type FullVaccineTimeline record {
     record  { float total?; float daily?; float totalPerHundred?; float dailyPerMillion?; string date?;} [] fullvaccinetimelinelist;
 };

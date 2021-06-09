@@ -8,72 +8,72 @@ public client class Client {
         http:Client httpEp = check new (serviceUrl, clientConfig);
         self.clientEp = httpEp;
     }
-    remote isolated function getGlobalStatus(string? yesterday = (), string? twoDaysAgo = (), string? allowNull = ()) returns covidAll|error {
+    remote isolated function getGlobalStatus(string? yesterday = (), string? twoDaysAgo = (), string? allowNull = ()) returns CovidAll|error {
         string  path = string `/v3/covid-19/all`;
         map<anydata> queryParam = {yesterday: yesterday, twoDaysAgo: twoDaysAgo, allowNull: allowNull};
         path = path + getPathForQueryParam(queryParam);
-        covidAll response = check self.clientEp-> get(path, targetType = covidAll);
+        CovidAll response = check self.clientEp-> get(path, targetType = CovidAll);
         return response;
     }
-    remote isolated function getUSAStatusByState(string states, string? yesterday = (), string? allowNull = ()) returns covidState|error {
+    remote isolated function getUSAStatusByState(string states, string? yesterday = (), string? allowNull = ()) returns CovidState|error {
         string  path = string `/v3/covid-19/states/${states}`;
         map<anydata> queryParam = {yesterday: yesterday, allowNull: allowNull};
         path = path + getPathForQueryParam(queryParam);
-        covidState response = check self.clientEp-> get(path, targetType = covidState);
+        CovidState response = check self.clientEp-> get(path, targetType = CovidState);
         return response;
     }
-    remote isolated function getStatusByContinent(string continent, string? yesterday = (), string? twoDaysAgo = (), string? strict = (), string? allowNull = ()) returns covidContinent|error {
+    remote isolated function getStatusByContinent(string continent, string? yesterday = (), string? twoDaysAgo = (), string? strict = (), string? allowNull = ()) returns CovidContinent|error {
         string  path = string `/v3/covid-19/continents/${continent}`;
         map<anydata> queryParam = {yesterday: yesterday, twoDaysAgo: twoDaysAgo, strict: strict, allowNull: allowNull};
         path = path + getPathForQueryParam(queryParam);
-        covidContinent response = check self.clientEp-> get(path, targetType = covidContinent);
+        CovidContinent response = check self.clientEp-> get(path, targetType = CovidContinent);
         return response;
     }
-    remote isolated function getStatusByCountry(string country, string? yesterday = (), string? twoDaysAgo = (), string? strict = (), string? allowNull = ()) returns covidCountry|error {
+    remote isolated function getStatusByCountry(string country, string? yesterday = (), string? twoDaysAgo = (), string? strict = (), string? allowNull = ()) returns CovidCountry|error {
         string  path = string `/v3/covid-19/countries/${country}`;
         map<anydata> queryParam = {yesterday: yesterday, twoDaysAgo: twoDaysAgo, strict: strict, allowNull: allowNull};
         path = path + getPathForQueryParam(queryParam);
-        covidCountry response = check self.clientEp-> get(path, targetType = covidCountry);
+        CovidCountry response = check self.clientEp-> get(path, targetType = CovidCountry);
         return response;
     }
-    remote isolated function getGlobalStatusInTimeSeries(string? lastdays = ()) returns covidHistoricalAll|error {
+    remote isolated function getGlobalStatusInTimeSeries(string? lastdays = ()) returns CovidHistoricalAll|error {
         string  path = string `/v3/covid-19/historical/all`;
         map<anydata> queryParam = {lastdays: lastdays};
         path = path + getPathForQueryParam(queryParam);
-        covidHistoricalAll response = check self.clientEp-> get(path, targetType = covidHistoricalAll);
+        CovidHistoricalAll response = check self.clientEp-> get(path, targetType = CovidHistoricalAll);
         return response;
     }
-    remote isolated function getTimeSeriesbycountry(string country, string? lastdays = ()) returns covidHistoricalCountry|error {
+    remote isolated function getTimeSeriesbycountry(string country, string? lastdays = ()) returns CovidHistoricalCountry|error {
         string  path = string `/v3/covid-19/historical/${country}`;
         map<anydata> queryParam = {lastdays: lastdays};
         path = path + getPathForQueryParam(queryParam);
-        covidHistoricalCountry response = check self.clientEp-> get(path, targetType = covidHistoricalCountry);
+        CovidHistoricalCountry response = check self.clientEp-> get(path, targetType = CovidHistoricalCountry);
         return response;
     }
-    remote isolated function getTimeSeriesByProvince(string country, string province, string? lastdays = ()) returns covidHistoricalProvince|error {
+    remote isolated function getTimeSeriesByProvince(string country, string province, string? lastdays = ()) returns CovidHistoricalProvince|error {
         string  path = string `/v3/covid-19/historical/${country}/${province}`;
         map<anydata> queryParam = {lastdays: lastdays};
         path = path + getPathForQueryParam(queryParam);
-        covidHistoricalProvince response = check self.clientEp-> get(path, targetType = covidHistoricalProvince);
+        CovidHistoricalProvince response = check self.clientEp-> get(path, targetType = CovidHistoricalProvince);
         return response;
     }
-    remote isolated function getVaccineTrialData() returns vaccines|error {
+    remote isolated function getVaccineTrialData() returns Vaccines|error {
         string  path = string `/v3/covid-19/vaccine`;
-        vaccines response = check self.clientEp-> get(path, targetType = vaccines);
+        Vaccines response = check self.clientEp-> get(path, targetType = Vaccines);
         return response;
     }
-    remote isolated function getTotalGlobalVaccineDosesAdministered(string? lastdays = (), string? fullData = ()) returns vaccineCoverage|error {
+    remote isolated function getTotalGlobalVaccineDosesAdministered(string? lastdays = (), string? fullData = ()) returns VaccineCoverage|error {
         string  path = string `/v3/covid-19/vaccine/coverage`;
         map<anydata> queryParam = {lastdays: lastdays, fullData: fullData};
         path = path + getPathForQueryParam(queryParam);
-        vaccineCoverage response = check self.clientEp-> get(path, targetType = vaccineCoverage);
+        VaccineCoverage response = check self.clientEp-> get(path, targetType = VaccineCoverage);
         return response;
     }
-    remote isolated function getVaccineCoverageByCountry(string country, string? lastdays = (), string? fullData = ()) returns vaccineCountryCoverage|error {
+    remote isolated function getVaccineCoverageByCountry(string country, string? lastdays = (), string? fullData = ()) returns VaccineCountryCoverage|error {
         string  path = string `/v3/covid-19/vaccine/coverage/countries/${country}`;
         map<anydata> queryParam = {lastdays: lastdays, fullData: fullData};
         path = path + getPathForQueryParam(queryParam);
-        vaccineCountryCoverage response = check self.clientEp-> get(path, targetType = vaccineCountryCoverage);
+        VaccineCountryCoverage response = check self.clientEp-> get(path, targetType = VaccineCountryCoverage);
         return response;
     }
 }

@@ -39,6 +39,22 @@ To obtain an API Key please follow these steps
 
 Then provide the obtained API Key in client configuration.
 
+### Client configuration
+
+```ballerina
+    import ballerinax/openweathermap;
+
+    ApiKeysConfig config = {
+        apiKeys : {
+            appid : "<your appid>"
+        }
+    }
+
+    openweathermap:Client myclient = check new openweathermap:Client(config);
+
+};
+```
+
 ## Module Overview
 
 The Open Weather Map connector consume the data exposed in openweathermap.org. It is currently supporting the following operations.
@@ -50,10 +66,6 @@ Can be use to access urrent weather data for any location on Earth including ove
 For more details please check [here]("https://openweathermap.org/current")
 
 ```ballerina
-    import ballerinax/openweathermap;
-
-    openweathermap:Client weatherclient = check new openweathermap:Client(config);
-
     CurrentWeatherData result = check weatherclient->getCurretWeatherData("Colombo");
     log:printInfo("Colombo Current Weather data : " + result.toString());
 
@@ -66,10 +78,6 @@ Can be use to access current weather, minute forecast for 1 hour, hourly forecas
 For more details please check [here]("https://openweathermap.org/api/one-call-api")
 
 ```ballerina
-    import ballerinax/openweathermap;
-
-    openweathermap:Client weatherclient = check new openweathermap:Client(config);
-
     CurrentWeatherData result = check weatherclient->getWeatherForecast(lat = "6.93194", lon = "79.847778");
     log:printInfo("Colombo Weather Forecast : " + result.toString());
 ```

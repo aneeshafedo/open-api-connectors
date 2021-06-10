@@ -1,6 +1,6 @@
 # Open Weather Map Ballerina Connector
 
-Provide current weather data and weather forecasts though Open Weather Map API
+Provide current weather data and weather forecasts through Open Weather Map API
 
 ## Compatibility
 
@@ -59,9 +59,9 @@ Then provide the obtained API Key in client configuration.
 
 The Open Weather Map connector consume the data exposed in [openweathermap.org](https://openweathermap.org/). It is currently supporting the following operations.
 
-### Get Curret Weather Data
+### Get Current Weather Data
 
-Can be use to access current weather data for any location on Earth including over 200,000 cities.
+Can be used to access current weather data for any location on Earth including over 200,000 cities.
 
 For more details please check [here](https://openweathermap.org/current)
 
@@ -73,7 +73,7 @@ For more details please check [here](https://openweathermap.org/current)
 
 ### Get Weather Forecast
 
-Can be use to access current weather, minute forecast for 1 hour, hourly forecast for 48 hours, daily forecast for 7 days and government weather alerts.
+Can be used to access current weather, minute forecast for 1 hour, hourly forecast for 48 hours, daily forecast for 7 days and government weather alerts.
 
 For more details please check [here](https://openweathermap.org/api/one-call-api)
 

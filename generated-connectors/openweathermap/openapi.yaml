@@ -2,7 +2,7 @@ openapi: "3.0.1"
 
 info:
   title: "OpenWeatherMap API"
-  description: "Get current weather, daily forecast for 16 days, and 3-hourly forecast 5 days for your city. Helpful stats, graphics, and this day in history charts are available for your reference. Interactive maps show precipitation, clouds, pressure, wind around your location stations. Data is available in JSON, XML, or HTML format. **Note**: This sample Swagger file covers the `current` endpoint only from the OpenWeatherMap API. <br/><br/> **Note**: All parameters are optional, but you must select at least one parameter. Calling the API by city ID (using the `id` parameter) will provide the most precise location results."
+  description: "Get current weather, daily forecast for 16 days, and 3-hourly forecast 5 days for your city. Helpful stats, graphics, and this day in history charts are available for your reference. Interactive maps show precipitation, clouds, pressure, wind around your location stations. Data is available in JSON, XML, or HTML format. **Note**: All parameters are optional, but you must select at least one parameter. Calling the API by city ID (using the `id` parameter) will provide the most precise location results."
   version: "2.5.2"
   termsOfService: "https://openweathermap.org/terms"
   contact:
@@ -36,7 +36,6 @@ paths:
         - $ref: '#/components/parameters/mode'
       x-display: 
         label: "Current Weather"
-
       responses:
         200:
           description: Successful response
@@ -56,7 +55,7 @@ paths:
     get:
       tags:
       - Weather Forecast
-      summary: "Weather forcast for for one location"
+      summary: "Provide weather forecast for any geographical coordinates"
       description: "Access to current weather, minute forecast for 1 hour, hourly forecast for 48 hours, daily forecast for 7 days and government weather alerts."
       operationId: getWeatherForecast
       parameters:
@@ -90,7 +89,7 @@ paths:
             type: string 
           x-display: 
             label: Exclude
-        - description: "Units of measurement. standard, metric and imperial units are available. If you do not use the units parameter, standard units will be applied by default."
+        - description: '**Units**. *Example: imperial*. Possible values: `standard`, `metric`, and `imperial`. When you do not use units parameter, format is `standard` by default.'
           in: query
           name: units
           required: false
@@ -98,7 +97,7 @@ paths:
             type: string 
           x-display: 
             label: Units
-        - description: "You can use the lang parameter to get the output in your language."
+        - description: '**Language**. *Example: en*. You can use lang parameter to get the output in your language. We support the following languages that you can use with the corresponded lang values: Arabic - `ar`, Bulgarian - `bg`, Catalan - `ca`, Czech - `cz`, German - `de`, Greek - `el`, English - `en`, Persian (Farsi) - `fa`, Finnish - `fi`, French - `fr`, Galician - `gl`, Croatian - `hr`, Hungarian - `hu`, Italian - `it`, Japanese - `ja`, Korean - `kr`, Latvian - `la`, Lithuanian - `lt`, Macedonian - `mk`, Dutch - `nl`, Polish - `pl`, Portuguese - `pt`, Romanian - `ro`, Russian - `ru`, Swedish - `se`, Slovak - `sk`, Slovenian - `sl`, Spanish - `es`, Turkish - `tr`, Ukrainian - `ua`, Vietnamese - `vi`, Chinese Simplified - `zh_cn`, Chinese Traditional - `zh_tw`.'
           in: query
           name: lang
           required: false
@@ -130,6 +129,8 @@ security:
 tags:
   - name: Current Weather Data
     description: "Get current weather details"
+  - name: Weather Forecast
+    description: "Get data related to weather forecast"
 
 externalDocs:
   description: API Documentation
@@ -215,109 +216,148 @@ components:
   schemas:
     WeatherForecast:
       type: object
+      description: "Weather forecast data"
       properties:
         lat:
           type: number
+          description: Latitude
         lon:
           type: number
+          description: Longtitude
         timezone:
           type: string
+          description: Timezone name for the requested location
         timezone_offset:
           type: number
+          description: Shift in seconds from UTC
         current:
           $ref: '#/components/schemas/ForecastCurrent'
         minutely:
           type: array
           items:
             $ref: '#/components/schemas/Minutely'
+          description: Minutely weather forecast.
         hourly:
           type: array
           items:
             $ref: '#/components/schemas/Hourly'
+          description: Hourly weather forecast.
         daily:
           type: array
           items:
             $ref: '#/components/schemas/Daily'
+          description: Daily weather forecast.
         alerts:
           type: array
           items:
              $ref: '#/components/schemas/Alerts'
+          description: Government weather alerts.
     Alerts:
       type: object
       properties:
         sender_name:
           type: string
+          description:  Name of the alert source.
         event:
           type: string
+          description: Alert event name
         description:
           type: string
+          description: Description of the alert
         start:
           type: number
+          description: Date and time of the start of the alert, Unix, UTC
         end:
           type: number
+          description: Date and time of the end of the alert, Unix, UTC
         tags:
           type: array
           items:
             type: string
+          description: Tags related to alerts
     Temp:
       type: object
       properties:
         day:
           type: number
+          description: Day temperature.
         min:
           type: number
+          description: Min daily temperature.
         max:
           type: number
+          description: Max daily temperature.
         night:
           type: number
+          description: Night temperature.
         eve:
           type: number
+          description: Evening temperature.
         morn:
           type: number
+          description: Morning temperature
     FeelsLike:
       type: object
       properties:
         day:
           type: number
+          description: Day temperature.
         night:
           type: number
+          description: Night temperature.
         eve:
           type: number
+          description: Evening temperature.
         morn:
           type: number
+          description: Morning temperature.
     Daily:
       type: object
+      description: "Daily forecast weather data API response"
       properties:
         dt:
           type: number
+          description: Time of the forecasted data, Unix, UTC
         temp:
           $ref: '#/components/schemas/Temp'
         feels_like:
           $ref: '#/components/schemas/FeelsLike'
         moonrise:
           type: number
+          description: he time of when the moon rises for this day, Unix, UTC
         moonset:
           type: number
+          description: The time of when the moon sets for this day, Unix, UTC
         moon_phase:
           type: number
+          description: "Moon phase. 0 and 1 are 'new moon', 0.25 is 'first quarter moon', 0.5 is 'full moon' and 0.75 is 'last quarter moon'. The periods in between are called 'waxing crescent', 'waxing gibous', 'waning gibous', and 'waning crescent', respectively."
         pressure:
           type: number
+          description: "Atmospheric pressure on the sea level, hPa"
         humidity:
           type: number
+          description: Humidity, %
         dew_point:
           type: number
+          description: "Atmospheric temperature (varying according to pressure and humidity) below which water droplets begin to condense and dew can form. Units – default: kelvin, metric: Celsius, imperial: Fahrenheit."
         uvi:
           type: number
+          description:  The maximum value of UV index for the day
         clouds:
           type: number
+          description: Cloudiness, %
         visibility:
           type: number
+          description: Visibility of the atmosphere
         wind_deg:
           type: number
+          description: Wind direction, degrees (meteorological)
         wind_gust:
           type: number
+          description: "(where available) Wind gust. Units – default: metre/sec, metric: metre/sec, imperial: miles/hour."
         pop:
           type: number
+          description: Probability of precipitation
         weather:
           type: array
           items:
@@ -325,33 +365,47 @@ components:
           description: (more info Weather condition codes)
         rain:
           type: number
+          description: where available) Precipitation volume, mm
     Hourly:
       type: object
+      description: "Hourly forecast weather data API response"
       properties:
         dt:
           type: number
+          description: Time of the forecasted data, Unix, UTC
         temp:
           type: number
+          description: "Temperature. Units – default: kelvin, metric: Celsius, imperial: Fahrenheit."
         feels_like:
           type: number
+          description: "Temperature. This accounts for the human perception of weather. Units – default: kelvin, metric: Celsius, imperial: Fahrenheit."
         pressure:
           type: number
+          description: "Atmospheric pressure on the sea level, hPa"
         humidity:
           type: number
+          description: "Humidity, %"
         dew_point:
           type: number
+          description: "Atmospheric temperature (varying according to pressure and humidity) below which water droplets begin to condense and dew can form. Units – default: kelvin, metric: Celsius, imperial: Fahrenheit."
         uvi:
           type: number
+          description: "UV index"
         clouds:
           type: number
+          description: "Cloudiness, %"
         visibility:
           type: number
+          description: "Average visibility, metres"
         wind_deg:
           type: number
+          description: "Wind direction, degrees (meteorological)"
         wind_gust:
           type: number
+          description: "(where available) Wind gust. Units – default: metre/sec, metric: metre/sec, imperial: miles/hour."
         pop:
           type: number
+          description: "Probability of precipitatio"
         weather:
           type: array
           items:
@@ -364,37 +418,54 @@ components:
       properties: 
         dt:
           type: number
+          description: Time of the forecasted data, unix, UTC
         precipitation:
           type: number
+          description: Precipitation volume, mm
+      description: "Minute forecast weather data API response"
     ForecastCurrent:
       type: object
+      description: Current weather data API response
       properties: 
         dt:
           type: number
+          description: Current time, Unix, UTC
         sunrise:
           type: number
+          description: Sunrise time, Unix, UTC
         sunset:
           type: number
+          description: Sunset time, Unix, UTC
         temp:
           type: number
+          description: "Temperature. Units - default: kelvin, metric: Celsius, imperial: Fahrenheit."
         feels_like: 
           type: number
+          description: "Temperature. This temperature parameter accounts for the human perception of weather. Units – default: kelvin, metric: Celsius, imperial: Fahrenheit."
         pressure:
           type: number
+          description: "Atmospheric pressure on the sea level, hPa"
         humidity:
           type: number
+          description: "Humidity, %"
         dew_point:
           type: number
+          description: "Atmospheric temperature (varying according to pressure and humidity) below which water droplets begin to condense and dew can form. Units – default: kelvin, metric: Celsius, imperial: Fahrenheit."
         uvi:
           type: number
+          description: "Current UV index"
         clouds:
           type: number
+          description: "Cloudiness, %"
         visibility:
           type: number
+          description: Average visibility, metres
         wind_speed:
           type: number
+          description: "Wind speed. Wind speed. Units – default: metre/sec, metric: metre/sec, imperial: miles/hour."
         wind_deg:
           type: number
+          description: Wind direction, degrees (meteorological)
         weather:
           type: array
           items:

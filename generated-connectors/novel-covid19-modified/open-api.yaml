@@ -51,14 +51,14 @@ paths:
               - '0'
             type: string
           description: 'By default, if a value is missing, it is returned as 0. This allows nulls to be returned'
-      summary: 'Get global COVID-19 totals for today, yesterday and two days ago'
+      description: 'Get global COVID-19 totals for today, yesterday and two days ago'
       responses:
         '200':
           description: Status OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CovidAll'
+                $ref: '#/components/schemas/CovidGlobal'
   '/v3/covid-19/states/{states}':
     get:
       tags:
@@ -91,7 +91,7 @@ paths:
               - '0'
             description: 'By default, if a value is missing, it is returned as 0. This allows nulls to be returned'
             type: string
-      summary: Get COVID-19 totals for specific US State(s)
+      description: Get COVID-19 totals for specific US State(s)
       responses:
         '200':
           description: Status OK
@@ -150,7 +150,7 @@ paths:
               - '0'
             description: 'By default, if a value is missing, it is returned as 0. This allows nulls to be returned'
             type: string
-      summary: Get COVID-19 totals for a specific continent
+      description: Get COVID-19 totals for a specific continent
       responses:
         '200':
           description: Status OK
@@ -209,7 +209,7 @@ paths:
               - '0'
             description: 'By default, if a value is missing, it is returned as 0. This allows nulls to be returned'
             type: string
-      summary: Get COVID-19 totals for a specific country
+      description: Get COVID-19 totals for a specific country
       responses:
         '200':
           description: Status OK
@@ -228,7 +228,7 @@ paths:
           description: 'Number of days to return. Use ''all'' for the full data set (e.g. 15, all, 24)'
           schema:
             type: string
-      summary: Get global accumulated COVID-19 time series data
+      description: Get global accumulated COVID-19 time series data
       responses:
         '200':
           description: Status Ok
@@ -254,7 +254,7 @@ paths:
           schema:
             type: string
             default: 30
-      summary: Get COVID-19 time series data for a specific country
+      description: Get COVID-19 time series data for a specific country
       responses:
         '200':
           description: Status Ok
@@ -286,7 +286,7 @@ paths:
           schema:
             type: string
             default: 30
-      summary: Get COVID-19 time series data for a specific province in a country
+      description: Get COVID-19 time series data for a specific province in a country
       responses:
         '200':
           description: Status Ok
@@ -299,7 +299,7 @@ paths:
       tags:
         - 'COVID-19: Vaccine'
       operationId: getVaccineTrialData
-      summary: 'Get vaccine trial data from RAPS (Regulatory Affairs Professional Society). Specifically published by Jeff Craven at https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-vaccine-tracker'
+      description: 'Get vaccine trial data from RAPS (Regulatory Affairs Professional Society). Specifically published by Jeff Craven at https://www.raps.org/news-and-articles/news-articles/2020/3/covid-19-vaccine-tracker'
       responses:
         '200':
           description: Status Ok
@@ -325,7 +325,7 @@ paths:
           schema:
             type: string
             default: 'false'
-      summary: 'Get total global COVID-19 Vaccine doses administered. Sourced from https://covid.ourworldindata.org/'
+      description: 'Get total global COVID-19 Vaccine doses administered. Sourced from https://covid.ourworldindata.org/'
       responses:
         '200':
           description: Status Ok
@@ -362,7 +362,7 @@ paths:
           schema:
             type: string
             default: 'false'
-      summary: 'Get COVID-19 vaccine doses administered for a country that has reported vaccination rollout. Sourced from https://covid.ourworldindata.org/'
+      description: 'Get COVID-19 vaccine doses administered for a country that has reported vaccination rollout. Sourced from https://covid.ourworldindata.org/'
       responses:
         '200':
           description: Status Ok
@@ -377,7 +377,7 @@ paths:
                   $ref: '#/components/examples/countryFullVaccineTimeline'
 components:
   schemas:
-    CovidAll:
+    CovidGlobal:
       properties:
         updated:
           type: number
@@ -419,6 +419,7 @@ components:
           type: number
         affectedCountries:
           type: number
+      description: Covid-19 global status
     CovidState:
       properties:
         state:
@@ -445,6 +446,7 @@ components:
           type: number
         population:
           type: number
+      description: Covid-19 status in the given USA state
     CovidContinent:
       properties:
         updated:
@@ -494,6 +496,7 @@ components:
           type: array
           items:
             type: string
+      description: Covid-19 status of the given continent
     CovidCountry:
       properties:
         updated:
@@ -558,6 +561,7 @@ components:
           type: number
         criticalPerOneMillion:
           type: number
+      description: Covid-19 status of the given country
     CovidHistoricalAll:
       description: 'The amount of key-value pairs in ''cases'', ''deaths'' and ''recovered'' is dependent on the ''lastdays'' query'
       properties:
@@ -603,6 +607,7 @@ components:
               properties:
                 date:
                   type: number
+      description: Covid-19 historical data of the given country
     CovidHistoricalProvince:
       properties:
         country:
@@ -628,6 +633,7 @@ components:
               properties:
                 date:
                   type: number
+      description: Covid-19 historical data of the given province
     Vaccines:
       properties:
         source:
@@ -642,6 +648,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Vaccine'
+      description: Covid19-19 vaccine trial data
     Vaccine:
       properties:
         candidate:
@@ -660,6 +667,7 @@ components:
           type: array
           items:
             type: string
+      description: Covid-19 vaccine related data
     Phases:
       properties:
         phase:
@@ -670,6 +678,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/SimpleVaccineTimeline'
         - $ref: '#/components/schemas/FullVaccineTimeline'
+      description: Covid-19 vaccine coverage related data
     VaccineCountryCoverage:
       type: object
       properties:
@@ -684,6 +693,7 @@ components:
       properties:
         date:
           type: number
+      description: Covid-19 Vaccine timeline briefly 
     FullVaccineTimeline:
       type: array
       items:
@@ -699,6 +709,7 @@ components:
             type: number
           date:
             type: string
+      description: Descriptive Covid-19 vaccine timeline
   examples:
     countriesSimpleVaccineTimeline:
       value:
